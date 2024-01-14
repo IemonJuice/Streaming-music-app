@@ -3,12 +3,13 @@ import {MusicCatalogController} from './music-catalog.controller';
 import {MusicCatalogService} from '../services/music-catalog.service';
 import {MusicDto} from "../../../common/models/music.dto";
 import {Music} from "../../../common/database/entities/music.entity";
+import {response} from "express";
 
 
 describe('MusicCatalogController', () => {
   let controller: MusicCatalogController;
 
-  const music: MusicDto[] = [
+  const music: Music[] = [
     {
       id: 1,
       name: "name1",
@@ -30,8 +31,9 @@ describe('MusicCatalogController', () => {
   ]
 
   const mockCatalogMusicService = {
+
     addNewMusic: jest.fn().mockImplementation((musicDto: MusicDto, filename: string) => {
-      const newMusic: MusicDto = {
+      const newMusic: Music = {
         author: musicDto.author,
         fileName: filename,
         name: musicDto.name,
@@ -41,9 +43,11 @@ describe('MusicCatalogController', () => {
       return newMusic;
 
     }),
+
     getAllMusic: jest.fn().mockImplementation(() => music),
 
-    saveMusic: jest.fn().mockImplementation((file: any) => file)
+    saveMusic: jest.fn().mockImplementation((file: any) => file),
+
   }
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -60,16 +64,23 @@ describe('MusicCatalogController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
   it('should return all music', () => {
     expect(controller.getAllMusicCatalog()).toEqual(music);
   })
 
   it('should save music', async () => {
-    const mockFile = {filename: 'test.mp3', originalname: 'test.mp3'} as Express.Multer.File;
-    const mockMusicDto = {author: 'test', fileName: 'test', name: 'test'} as MusicDto;
-    const result = await controller.uploadFile(mockFile, mockMusicDto);
+    const mockFile: Express.Multer.File = {filename: 'test.mp3', originalname: 'test.mp3'} as Express.Multer.File;
+    const mockMusicDto: MusicDto = {author: 'test', fileName: 'test', name: 'test'} as MusicDto;
+    const result: Music = await controller.uploadFile(mockFile, mockMusicDto);
     expect(result.name).toEqual('test')
   });
 
+  it('should return music by specific id', async() => {
+    jest.spyOn(controller, 'getMusicFile').mockImplementation(  async (id) =>  music.find((value) => value.id === id))
+
+    const result = await controller.getMusicFile(2, response)
+    expect(result).toEqual(music[1]);
+  })
 
 });

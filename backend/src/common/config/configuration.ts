@@ -4,6 +4,7 @@ import {
 } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Music } from '../database/entities/music.entity';
+import {User} from "../database/entities/user.entity";
 
 export default class TypeOrmConfig {
   static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions {
@@ -14,7 +15,7 @@ export default class TypeOrmConfig {
       username: configService.get('DB_USER'),
       password: configService.get('DB_PASS'),
       database: configService.get('DB_NAME'),
-      entities: [Music],
+      entities: [Music,User],
       synchronize: true,
     };
   }

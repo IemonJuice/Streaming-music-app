@@ -1,5 +1,5 @@
 export interface MusicDto {
-  id?: number,
+  id?:number;
   name: string,
   fileName: string,
   author: string
