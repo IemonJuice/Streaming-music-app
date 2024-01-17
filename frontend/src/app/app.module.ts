@@ -7,12 +7,14 @@ import {BrowserAnimationsModule, provideAnimations} from "@angular/platform-brow
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {CoreModule} from "./core/core.module";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    CoreModule,
     BrowserModule,
     AppRoutingModule,
 
