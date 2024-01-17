@@ -12,10 +12,12 @@ import {FileInterceptor} from '@nestjs/platform-express';
 import {MusicDto} from "../../../common/models/music.dto";
 import {Music} from "../../../common/database/entities/music.entity";
 import {Response} from "express";
+import * as fs from "fs";
 
 @Controller('music-catalog')
 export class MusicCatalogController {
-  constructor(private musicCatalogService: MusicCatalogService) {}
+  constructor(private musicCatalogService: MusicCatalogService) {
+  }
 
   @Get()
   getAllMusicCatalog(): Promise<Music[]> {
@@ -42,6 +44,15 @@ export class MusicCatalogController {
     this.musicCatalogService.getMusicFileById(musicId).then((path) => {
       res.sendFile(path);
     })
+
     return await this.musicCatalogService.getMusicInfoById(musicId)
   }
+
+  @Get('genres/:genre')
+  async getMusicWithFilteredGanre(@Param('genre') genre: string) {
+    return await this.musicCatalogService.getFilteredMusicByGenre(genre)
+  }
+
 }
+
+

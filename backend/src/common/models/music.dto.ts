@@ -3,4 +3,5 @@ export interface MusicDto {
   name: string,
   fileName: string,
   author: string
+  genre:string
 }

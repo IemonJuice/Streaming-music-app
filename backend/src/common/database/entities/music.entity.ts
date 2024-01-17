@@ -15,6 +15,9 @@ export class Music {
   @Column()
   author: string;
 
+  @Column()
+  genre: string;
+
   @ManyToOne(() => User, (user) => user.loadedMusic)
   authorId:User
 }
