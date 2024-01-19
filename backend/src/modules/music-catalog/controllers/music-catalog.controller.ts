@@ -2,7 +2,7 @@ import {
   Body,
   Controller, FileTypeValidator,
   Get, MaxFileSizeValidator, Param, ParseFilePipe,
-  Post, Res,
+  Post, Res, StreamableFile,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -40,19 +40,19 @@ export class MusicCatalogController {
   }
 
   @Get(':id')
-  async getMusicFile(@Param('id') musicId: number, @Res() res: Response) {
-    this.musicCatalogService.getMusicFileById(musicId).then((path) => {
-      res.sendFile(path);
-    })
-
-    return await this.musicCatalogService.getMusicInfoById(musicId)
+  async getMusicFile(@Param('id') musicId: number, @Res() res: Response): Promise<StreamableFile> {
+    const file = fs.createReadStream(await this.musicCatalogService.getMusicFileById(musicId));
+    file.on('close', () => {
+      res.end();
+    });
+    file.pipe(res);
+    return new StreamableFile(file);
   }
 
   @Get('genres/:genre')
   async getMusicWithFilteredGanre(@Param('genre') genre: string) {
     return await this.musicCatalogService.getFilteredMusicByGenre(genre)
   }
-
 }
 
 

@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {CoreModule} from "./core/core.module";
+import {NavBarModule} from "./features/nav-bar/nav-bar.module";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {CoreModule} from "./core/core.module";
 
     EffectsModule.forRoot([]),
 
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
+    NavBarModule,
   ],
   providers: [
     provideClientHydration(),
