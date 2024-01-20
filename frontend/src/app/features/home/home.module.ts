@@ -4,12 +4,14 @@ import { HomeComponent } from './componenets/home.component';
 import {RouterModule} from "@angular/router";
 import {routes} from "./home.routes";
 import {NavBarModule} from "../nav-bar/nav-bar.module";
+import { MusicComponent } from './componenets/music/music.component';
 
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    MusicComponent
   ],
     imports: [
         CommonModule,

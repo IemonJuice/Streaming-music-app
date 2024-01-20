@@ -8,7 +8,7 @@
         <span></span>
       </label>
     </button>
-    <input attr-test-search type="search" placeholder="Search">
+    <input attr-test-search #musicInput (input)="searchMusic(musicInput.value)" type="search" placeholder="Search">
   </div>
   <div class="main__trending">
     <h2 class="main__trending_heading">
@@ -21,7 +21,8 @@
             <h3>
               Lorem ipsum
             </h3>
-            <p class="flex items-center gap-0.5 "><img width="20px" src="./assets/images/svgs/music-logo.svg"  alt="">Lorem ipsum</p>
+            <p class="flex items-center gap-0.5 "><img width="20px" src="./assets/images/svgs/music-logo.svg" alt="">Lorem
+              ipsum</p>
           </div>
           <img width="50px" src='./assets/images/svgs/play-btn.svg' alt="">
         </div>
@@ -32,7 +33,8 @@
             <h3>
               Lorem ipsum
             </h3>
-            <p class="flex items-center gap-0.5 "><img width="20px" src="./assets/images/svgs/music-logo.svg"  alt="">Lorem ipsum</p>
+            <p class="flex items-center gap-0.5 "><img width="20px" src="./assets/images/svgs/music-logo.svg" alt="">Lorem
+              ipsum</p>
           </div>
           <img width="50px" src='./assets/images/svgs/play-btn.svg' alt="">
         </div>
@@ -43,7 +45,8 @@
             <h3>
               Lorem ipsum
             </h3>
-            <p class="flex items-center gap-0.5 "><img width="20px" src="./assets/images/svgs/music-logo.svg"  alt="">Lorem ipsum</p>
+            <p class="flex items-center gap-0.5 "><img width="20px" src="./assets/images/svgs/music-logo.svg" alt="">Lorem
+              ipsum</p>
           </div>
           <img width="50px" src='./assets/images/svgs/play-btn.svg' alt="">
         </div>
@@ -51,85 +54,16 @@
     </div>
   </div>
   <div class="main__genres_line">
-    <button  class="main__genre">Trending</button>
-    <button>Rock</button>
-    <button>Metal</button>
-    <button>Phonk</button>
-    <button>Pop</button>
-    <button>Rap</button>
+    <button (click)="filterMusic('trending')">all</button>
+    <button (click)="filterMusic('rock')">Rock</button>
+    <button (click)="filterMusic('metal')">Metal</button>
+    <button (click)="filterMusic('phonk')">Phonk</button>
+    <button (click)="filterMusic('pop')">Pop</button>
+    <button (click)="filterMusic('rap')">Rap</button>
   </div>
   <div class="main__music">
-    <div  class="main__music_music">
-      <div data-aos="fade" class="flex gap-5">
-        <img data-aos="fade-right"  class="song-image" src="https://www.bhmpics.com/downloads/purple-crown-Wallpapers/36.royal-gold-crown-on-purple-background-minimal-idea-concept-3d-rendering.jpg" alt="">
-        <div class="music">
-          <div class="music__name">I'm good blue</div>
-          <div class="music__author">Devid Guetta</div>
-        </div>
-      </div>
-      <div>
-        <img width="32px" src="./assets/images/svgs/heart.svg" alt="">
-      </div>
-    </div>
-    <div class="main__music_music">
-      <div class="flex gap-5">
-        <img class="song-image" src="https://images.unsplash.com/photo-1619045119136-349759036541?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHVycGxlJTIwYWVzdGhldGljfGVufDB8fDB8fHww" alt="">
-        <div class="music">
-          <div class="music__name">I'm good blue</div>
-          <div class="music__author">Devid Guetta</div>
-        </div>
-      </div>
-      <div>
-        <img width="32px" src="./assets/images/svgs/heart.svg" alt="">
-      </div>
-    </div>
-    <div class="main__music_music">
-      <div class="flex gap-5">
-        <img class="song-image" src="https://stamp.static.cnn.io/the-color-purple/images/page01.jpg" alt="">
-        <div class="music">
-          <div class="music__name">I'm good blue</div>
-          <div class="music__author">Devid Guetta</div>
-        </div>
-      </div>
-      <div>
-        <img width="32px" src="./assets/images/svgs/heart.svg" alt="">
-      </div>
-    </div>
-    <div class="main__music_music">
-      <div class="flex gap-5">
-        <img class="song-image" src="https://dailydish.co.uk/wp-content/uploads/2023/06/purple-aura-meaning.jpg" alt="">
-        <div class="music">
-          <div class="music__name">I'm good blue</div>
-          <div class="music__author">Devid Guetta</div>
-        </div>
-      </div>
-      <div>
-        <img width="32px" src="./assets/images/svgs/heart.svg" alt="">
-      </div>
-    </div>
-    <div class="main__music_music">
-      <div class="flex gap-5">
-        <img class="song-image" src="https://www.yotel.com/sites/default/files/styles/768x480/public/2022-06/shutterstock_2155076499.jpg?itok=4Ebj2oR_" alt="">
-        <div class="music">
-          <div class="music__name">I'm good blue</div>
-          <div class="music__author">Devid Guetta</div>
-        </div>
-      </div>
-      <div>
-        <img width="32px" src="./assets/images/svgs/heart.svg" alt="">
-      </div>
-    </div>
-    <div class="main__music_music">
-      <div class="flex gap-5">
-        <img class="song-image" src="https://www.yotel.com/sites/default/files/styles/768x480/public/2022-06/shutterstock_2155076499.jpg?itok=4Ebj2oR_" alt="">
-        <div class="music">
-          <div class="music__name">I'm good blue</div>
-          <div class="music__author">Devid Guetta</div>
-        </div>
-      </div>
-      <div>
-        <img width="32px" src="./assets/images/svgs/heart.svg" alt="">
-      </div>
-    </div>
+    <ng-container *ngIf="(musicList$ | async) as music ">
+      <app-music  *ngFor="let song of music" [music]="song"></app-music>
+    </ng-container>
   </div>
 </main>

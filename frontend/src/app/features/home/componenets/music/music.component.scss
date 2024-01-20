@@ -1,0 +1,42 @@
+:host{
+
+  width: 100%;
+}
+.main {
+  &__music{
+    padding-top: 10px;
+    margin-top: 10px;
+    max-height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    gap:30px;
+    align-items: start;
+
+    overflow-y: auto;
+    &_music{
+      display: flex;
+      justify-content: space-between;
+      color: white;
+      align-items: center;
+      margin: 0 auto;
+      width: 80%;
+      min-height: 75px;
+      img.song-image{
+        object-fit: cover;
+        width: 64px!important;
+        height: 64px!important;
+        border-radius: 25px;
+      }
+    }
+  }
+}
+.music{
+
+  &__name{
+    font-size: 1.5em;
+  }
+  &__author{
+    color: #908989;
+  }
+}

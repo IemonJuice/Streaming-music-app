@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {RouterModule} from "@angular/router";
 import {routes} from "./catalog.routes";
 import { CatalogComponent } from './components/catalog.component';
@@ -10,9 +10,10 @@ import { CatalogComponent } from './components/catalog.component';
   declarations: [
     CatalogComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        NgOptimizedImage
+    ]
 })
 export class CatalogModule { }

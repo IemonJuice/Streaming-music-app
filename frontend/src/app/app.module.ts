@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {CoreModule} from "./core/core.module";
 import {NavBarModule} from "./features/nav-bar/nav-bar.module";
+import {provideHttpClient} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import {NavBarModule} from "./features/nav-bar/nav-bar.module";
   ],
   providers: [
     provideClientHydration(),
-    provideAnimations()
+    provideAnimations(),
+    provideHttpClient(),
+
   ],
   bootstrap: [AppComponent]
 })

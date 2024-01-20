@@ -1,0 +1,91 @@
+.catalog {
+  padding-top: 25px;
+  width: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  background: rgb(34, 34, 34);
+  background: -moz-linear-gradient(128deg, rgba(34, 34, 34, 1) 0%, rgba(58, 29, 120, 1) 100%);
+  background: -webkit-linear-gradient(128deg, rgba(34, 34, 34, 1) 0%, rgba(58, 29, 120, 1) 100%);
+  background: linear-gradient(128deg, rgba(34, 34, 34, 1) 0%, rgba(58, 29, 120, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#222222", endColorstr="#3a1d78", GradientType=1);
+
+  &__navigation {
+    margin: 0 auto;
+    width: 90%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &_back {
+      background-color: rgba(22, 21, 21, 0.56);
+      background-image: url("../../../../assets/images/svgs/search.svg");
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#161515", endColorstr="#222222", GradientType=1);
+      width: 64px;
+      height: 64px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 15px;
+      img {
+        width: 32px;
+      }
+    }
+    &_like {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(22, 21, 21, 0.56);
+      background-image: url("../../../../assets/images/svgs/search.svg");
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#161515", endColorstr="#222222", GradientType=1);
+      border-radius: 15px;
+      width: 64px;
+      height: 64px;
+      img {
+        width: 32px;
+      }
+    }
+  }
+}
+.favorites{
+  &__heading{
+    width: 90%;
+    margin: 25px auto;
+    font-size: 2em;
+    color: white;
+    font-weight: bold;
+  }
+  &__blocks{
+    margin: 0 auto;
+    height: 600px;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+    flex-wrap: wrap;
+
+    &_block{
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      width: 100%;
+      min-height: 170px;
+      color: white;
+      font-size: 1.5em;
+      span{
+        color: #733ce0;
+      }
+      img{
+        width: 100%;
+        height:150px;
+        object-fit: cover;
+        border-radius: 25px;
+      }
+    }
+  }
+}

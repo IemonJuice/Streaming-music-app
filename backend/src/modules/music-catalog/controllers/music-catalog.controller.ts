@@ -53,6 +53,11 @@ export class MusicCatalogController {
   async getMusicWithFilteredGanre(@Param('genre') genre: string) {
     return await this.musicCatalogService.getFilteredMusicByGenre(genre)
   }
+
+  @Get('search/:search')
+  async getSearchingMusic(@Param('search') musicInfo:string) {
+    return await this.musicCatalogService.getMusicInfoBySpecificSearch(musicInfo)
+  }
 }
 
 

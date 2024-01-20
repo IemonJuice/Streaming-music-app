@@ -8,7 +8,8 @@ import {MusicDto} from "../../../common/models/music.dto";
 
 @Injectable()
 export class MusicCatalogService {
-  constructor(@InjectRepository(Music) private musicRepository: Repository<Music>,) {}
+  constructor(@InjectRepository(Music) private musicRepository: Repository<Music>,) {
+  }
 
   async addNewMusic(musicDto: MusicDto, filename: string) {
     const music: Music = new Music();
@@ -43,7 +44,19 @@ export class MusicCatalogService {
   async getFilteredMusicByGenre(genre: string) {
     return await this.musicRepository.createQueryBuilder('music')
       .select()
-      .where('music.genre = :genre',{genre:genre})
+      .where('music.genre = :genre', {genre: genre})
+      .getMany()
+  }
+
+  async getMusicInfoBySpecificSearch(musicInfo:string) {
+    return this.musicRepository.createQueryBuilder('music')
+      .select()
+      .where('music.author = :searchingField', {
+        searchingField: musicInfo,
+      })
+      .orWhere('music.name LIKE :searchingField', {
+        searchingField: `%${musicInfo}%`,
+      })
       .getMany()
   }
 }
