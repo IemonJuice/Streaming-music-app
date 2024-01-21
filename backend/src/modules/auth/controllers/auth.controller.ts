@@ -13,6 +13,7 @@ export class AuthController {
 
   @Post('register')
   register(@Body() userToRegister:UserToRegisterDto) {
+    console.log(userToRegister)
     return this.registerService.registerUser(userToRegister)
   }
 

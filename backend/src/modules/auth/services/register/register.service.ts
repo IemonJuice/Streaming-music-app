@@ -12,7 +12,8 @@ export class RegisterService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     private authService: AuthService,
-  ) {}
+  ) {
+  }
 
   async registerUser(
     userToRegister: UserToRegisterDto,
@@ -25,17 +26,12 @@ export class RegisterService {
       throw new BadRequestException('user already exists');
     }
 
-    const hashedPassword = await hash(userToRegister.password,10);
-
-    const newUser:User = new UserBuilder()
-      .setDateOfBirth(userToRegister.dateOfBirth)
+    const hashedPassword = await hash(userToRegister.password, 10);
+    const newUser: User = new UserBuilder()
       .setDateOfRegistration(userToRegister.dateOfRegistration)
       .setEmail(userToRegister.email)
-      .setTel(userToRegister.tel)
-      .setFirstName(userToRegister.firstname)
-      .setGender(userToRegister.gender)
+      .setFirstName(userToRegister.firstName)
       .setPassword(hashedPassword)
-      .setLastName(userToRegister.lastname)
       .setUsername(userToRegister.username)
       .getUser()
 

@@ -1,17 +1,11 @@
-import {IsDate, IsEmail, IsNotEmpty, IsPhoneNumber, MinLength} from "class-validator";
+import {IsDate, IsEmail, IsNotEmpty, MinLength} from "class-validator";
 
 export class UserToRegisterDto {
   @IsNotEmpty()
-  firstname: string;
-
-  @IsNotEmpty()
-  @IsDate()
-  dateOfBirth: Date;
+  firstName: string;
 
   @IsNotEmpty()
   username:string;
-  @IsNotEmpty()
-  lastname: string;
 
   @IsDate()
   @IsNotEmpty()
@@ -24,11 +18,4 @@ export class UserToRegisterDto {
   @IsEmail()
   @IsNotEmpty()
   email:string;
-
-  @IsNotEmpty()
-  @IsPhoneNumber()
-  tel:string
-
-  @IsNotEmpty()
-  gender:string;
 }

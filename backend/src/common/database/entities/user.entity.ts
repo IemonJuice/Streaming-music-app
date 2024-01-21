@@ -7,16 +7,10 @@ export class User{
   id:number
 
   @Column({nullable:false})
-  firstname: string;
+  firstName: string;
 
   @Column({nullable:false})
   username:string
-
-  @Column({nullable:false})
-  lastname: string;
-
-  @Column({nullable:false})
-  dateOfBirth: Date;
 
   @Column({nullable:false})
   dateOfRegistration: Date;
@@ -26,12 +20,6 @@ export class User{
 
   @Column({nullable:false})
   email:string;
-
-  @Column({nullable:false})
-  tel:string
-
-  @Column({nullable:false})
-  gender:string;
 
   @OneToMany(() => Music, (music) => music.author,{nullable:true})
   loadedMusic:Music[]
