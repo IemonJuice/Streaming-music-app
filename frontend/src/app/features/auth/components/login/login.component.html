@@ -1,1 +1,17 @@
-<p>login works!</p>
+<div class="login">
+  <div class="login__image">
+    <img src="./assets/other/auth2.png" alt="">
+  </div>
+  <span  [@fadeInOut] *ngIf="isErrorFromServer" class="fixed top-1/3 text-2xl text-gray-300">{{errorMessage | uppercase}}</span>
+  <form [formGroup]="form" class="login__form">
+    <span
+      *ngIf="!form.get('username')?.valid && form.get('username')?.touched">Username must have al least 8 characters
+    </span>
+    <input minlength="8" required formControlName="username" type="text" placeholder="USERNAME">
+    <span
+      *ngIf="!form.get('password')?.valid && form.get('password')?.touched">Password must have at least 8 characters</span>
+    <input required minlength="8" formControlName="password" type="password" placeholder="PASSWORD">
+    <button (click)="submitLoginForm()">Login</button>
+    <button routerLink="/auth/register">Register</button>
+  </form>
+</div>

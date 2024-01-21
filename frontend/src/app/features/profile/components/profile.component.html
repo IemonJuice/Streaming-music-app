@@ -1,1 +1,38 @@
-<p>profile works!</p>
+<div class="profile">
+
+  <div class="fixed z-40 top-5 right-5">
+    <img (click)="logout()" width="32px" src="./assets/images/svgs/logout.svg" alt="">
+  </div>
+
+  <div class="profile__top-background">
+  </div>
+
+  <div class="profile__image">
+    <img src="s" alt="s">
+    <div class="text-2xl">{{ 'Pasha' }}</div>
+    <div>{{ 'pasha@gmail.com' }}</div>
+  </div>
+
+  <div class="profile__info">
+    <div class="profile__info_content">
+      <div class="profile__info_block"><div><span class="text-purple-800">#</span>Uploaded</div> <div>1</div></div>
+      <div class="profile__info_block"><div><span class="text-purple-800">#</span>Liked</div> <div>112</div></div>
+      <div class="profile__info_block"><div><span class="text-purple-800">#</span>idk</div> <div>5</div></div>
+    </div>
+  </div>
+
+  <div class="profile__buttons">
+    <div>
+      <img src="./assets/images/svgs/heart.svg"  alt="">  Liked <img style="scale:-1" src="./assets/images/svgs/arrow_back.svg" alt="">
+    </div>
+    <div>
+      <img src="./assets/other/upload.png" alt=""> Uploaded<img style="scale:-1" src="./assets/images/svgs/arrow_back.svg" alt="">
+    </div>
+    <div>
+      <img  src="./assets/other/username.png" alt=""> Personal information<img style="scale:-1" src="./assets/images/svgs/arrow_back.svg" alt="">
+    </div>
+    <div>
+      <img  src="./assets/other/username.png" alt=""> Delete Account<img style="scale:-1" src="./assets/images/svgs/arrow_back.svg" alt="">
+    </div>
+  </div>
+</div>

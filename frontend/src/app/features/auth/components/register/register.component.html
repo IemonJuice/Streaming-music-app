@@ -1,1 +1,38 @@
-<p>register works!</p>
+<div class="register">
+
+  <span
+    [@fadeInOut] *ngIf="isErrorFromServer" class="fixed top-14    text-2xl text-gray-300">{{ errorMessage | uppercase }}
+  </span>
+
+  <form [formGroup]="form" class="register__form">
+
+    <span
+          *ngIf="!form.get('firstName')?.valid && form.get('firstName')?.touched">First name must have al least 8 characters
+    </span>
+
+    <input required minlength="8" formControlName="firstName" type="text" placeholder="FIRST NAME">
+
+    <span
+      *ngIf="!form.get('username')?.valid && form.get('username')?.touched">Username must have al least 8 characters
+    </span>
+
+    <input   formControlName="username" type="text" placeholder="USERNAME">
+
+    <span
+      *ngIf="!form.get('password')?.valid && form.get('password')?.touched">Password must have at least 8 characters
+    </span>
+
+    <input required minlength="8" formControlName="password" type="password" placeholder="PASSWORD ">
+
+    <span
+      *ngIf="!form.get('email')?.valid && form.get('email')?.touched">Write correct email
+    </span>
+
+    <input required minlength="8" formControlName="email" type="email" placeholder="EMAIL">
+
+    <button (click)="submitRegisterForm()">Register</button>
+
+    <button routerLink="/auth/login">Login</button>
+
+  </form>
+</div>
