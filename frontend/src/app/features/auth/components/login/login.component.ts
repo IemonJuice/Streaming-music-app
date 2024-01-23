@@ -4,6 +4,7 @@ import {AuthService} from "../../services/auth.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {CookieService} from "ngx-cookie-service";
 import {LoginResponse} from "../../../../core/models/login-response.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,8 @@ export class LoginComponent {
   cookieService:CookieService = inject(CookieService)
   isErrorFromServer: boolean = false;
 
+  router:Router = inject(Router);
+
   errorMessage: string ='';
 
   authService:AuthService = inject(AuthService);
@@ -37,6 +40,7 @@ export class LoginComponent {
       this.authService.login(this.form.getRawValue()).subscribe({
         next: (response:LoginResponse) => {
           this.cookieService.set('token',response.token)
+          this.router.navigateByUrl('/profile')
         },
         error: (err) => {
           this.isErrorFromServer = true;

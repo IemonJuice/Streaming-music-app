@@ -8,6 +8,7 @@ export const routes: Routes = [
   {path: 'upload', loadChildren: () => import('../features/upload/upload.module').then(m => m.UploadModule)},
   {path: 'profile',canActivate:[authGuard], loadChildren: () => import('../features/profile/profile.module').then(m => m.ProfileModule)},
   {path: 'auth', loadChildren: () => import('../features/auth/auth.module').then(m => m.AuthModule)},
+  {path: 'music', loadChildren: () => import('../features/music-player/music-player.module').then(m => m.MusicPlayerModule)},
   {path: 'not-found', loadChildren: () => import('../features/not-found/not-found.module').then(m => m.NotFoundModule)},
   {path: '**', redirectTo: 'not-found', pathMatch: 'full'},
 ]

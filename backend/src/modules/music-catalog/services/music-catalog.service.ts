@@ -16,6 +16,7 @@ export class MusicCatalogService {
     music.author = musicDto.author;
     music.name = musicDto.name;
     music.fileName = filename;
+    music.genre = musicDto.genre;
     return await this.musicRepository.save(music)
   }
 

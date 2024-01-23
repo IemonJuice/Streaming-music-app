@@ -30,11 +30,11 @@ export class MusicCatalogController {
   async uploadFile(@UploadedFile(
     new ParseFilePipe({
       validators: [
-        new MaxFileSizeValidator({maxSize: 1000000}),
-        new FileTypeValidator({fileType: 'mp4'}),
+        new MaxFileSizeValidator({maxSize: 10000000000}),
       ],
     }),
   ) file: Express.Multer.File, @Body() body: MusicDto) {
+    console.log(body)
     this.musicCatalogService.saveMusic(file);
     return await this.musicCatalogService.addNewMusic(body, file.originalname)
   }

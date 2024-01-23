@@ -1,0 +1,63 @@
+:host{
+  min-height: 100%;
+}
+
+.player {
+  padding-top: 100px;
+  color: #908989;
+  width: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: start;
+
+  align-items: center;
+  flex-direction: column;
+  gap:25px;
+  background: linear-gradient(-45deg, rgba(91, 51, 73, 1), rgb(54, 51, 91), #28262f, #252528);
+  &__image{
+    width: 85%;
+    img {
+      border-radius: 25px;
+    }
+  }
+  &__music{
+    width: 85%;
+    &_info{
+      h2{
+        width: 100%;
+        text-align: center;
+        font-size: 3em;
+      }
+      h3{
+        width: 100%;
+        text-align: center;
+        font-size: 1.5em;
+      }
+    }
+  }
+  &__controls{
+    gap:10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 100px;
+  }
+  &__timeline{
+    margin: 0 auto;
+    width: 80%;
+    .player__track{
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+  &__length{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
