@@ -1,38 +1,47 @@
-<ng-container *ngIf="musicInfo | async as music">
-<div class="player">
-  <div class="player__image">
-    <img src="https://i.pinimg.com/564x/ab/76/87/ab7687dcb9fb83575c4b72b19386ff3d.jpg" alt="">
-  </div>
-  <div class="player__music_info">
-    <h2><span class="text-purple-700">#</span>{{music.name}}</h2>
-    <h3><span class="text-purple-700">#</span>{{music.author}}</h3>
-  </div>
-  <div class="player__controls">
-    <audio  #audioElement class="hidden"  [src]="audioSrc" controls></audio>
+ <div class="player">
+    <ng-container *ngIf="musicInfo | async as music">
+    <div  class="player__image">
+      <img [@fadeInOut] src="https://i.pinimg.com/564x/ab/76/87/ab7687dcb9fb83575c4b72b19386ff3d.jpg" alt="">
+    </div>
+    <div  class="player__music_info">
+      <h2><span [@fadeInOut] class="text-purple-700">#</span>{{ music.name }}</h2>
+      <h3><span [@fadeInOut] class="text-purple-700">#</span>{{ music.author }}</h3>
+    </div>
+    <div  class="player__controls">
+      <audio #audioElement class="hidden" [src]="audioSrc" controls></audio>
+      <div class="left-10 absolute">
+        <img width="32px" src="./assets/images/svgs/random.svg" alt="">
+      </div>
+      <div (click)="prevSong()" class="player__prev_button">
+        <img class="-scale-x-100" width="32px" src="./assets/images/svgs/next-prev-button.svg" alt="">
+      </div>
 
-    <div class="player__prev_button">
-      <img   class="-scale-x-100"  width="32px" src="./assets/images/svgs/next-prev-button.svg" alt="">
+      <div class="player__play_button">
+        <img (click)="play(audioElement)" *ngIf="isAudioPaused" width="64px" src="./assets/images/svgs/play-button.svg"
+             alt="">
+        <img (click)="pause(audioElement)" *ngIf="!isAudioPaused" class="-scale-x-100" width="64px"
+             src="./assets/images/svgs/pause.svg" alt="">
+      </div>
+
+      <div (click)="nextSong()" class="player__next_button">
+        <img width="32px" src="./assets/images/svgs/next-prev-button.svg" alt="">
+      </div>
+
+      <div (click)="isLoop=!isLoop" [ngClass]="{'player__loop': isLoop}" class="right-10 absolute p-1">
+        <img width="32px" src="./assets/images/svgs/loop.svg" alt="">
+      </div>
+
     </div>
 
-    <div class="player__play_button">
-      <img (click)="play(audioElement)" *ngIf="isAudioPaused" width="64px" src="./assets/images/svgs/play-button.svg" alt="">
-      <img (click)="pause(audioElement)" *ngIf="!isAudioPaused" class="-scale-x-100"  width="64px" src="./assets/images/svgs/pause.svg" alt="">
+    <div class="player__timeline">
+      <div class="player__length">
+        <div>{{ currentTime }}s</div>
+        <div>{{ musicLength / 60 }}m</div>
+      </div>
+      <mat-slider step="1" [max]="musicLength" value="2" class="player__track">
+        <input (change)="setMusicTime()" [(ngModel)]="currentTime" matSliderThumb>
+      </mat-slider>
     </div>
-
-    <div class="player__next_button">
-      <img  width="32px" src="./assets/images/svgs/next-prev-button.svg" alt="">
-    </div>
-
+    </ng-container>
   </div>
 
-  <div class="player__timeline">
-    <div class="player__length">
-      <div>{{currentTime}}s</div>
-      <div>{{musicLength/60 }}m</div>
-    </div>
-    <mat-slider step="1" [max]="musicLength" value="2" class="player__track">
-      <input (change)="setMusicTime()" [(ngModel)]="currentTime"  matSliderThumb   >
-    </mat-slider>
-  </div>
-</div>
-</ng-container>

@@ -58,6 +58,11 @@ export class MusicCatalogController {
   async getSearchingMusic(@Param('search') musicInfo:string) {
     return await this.musicCatalogService.getMusicInfoBySpecificSearch(musicInfo)
   }
+  @Get('info/:id')
+  async getMusicInfoById(@Param('id') musicID:number) {
+    return await this.musicCatalogService.getMusicInfoById(musicID)
+  }
+
 }
 
 
