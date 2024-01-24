@@ -52,5 +52,4 @@ export class UploadedMusicComponent implements OnInit {
   deleteFile(id: number) {
     this.uploadService.delete(id);
   }
-
 }

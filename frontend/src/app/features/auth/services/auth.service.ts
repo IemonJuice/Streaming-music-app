@@ -34,4 +34,8 @@ export class AuthService {
   getProfile():Observable<Profile> {
     return this.http.get<Profile>(environment.base + 'auth' + '/' + 'profile');
   }
+
+  deleteProfile(id:number) {
+    return this.http.delete(environment.base + 'users' + '/' + id).subscribe()
+  }
 }
