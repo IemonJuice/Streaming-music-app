@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {UploadedMusicComponent} from "./uploaded-music/uploaded-music.component";
 import {MusicComponent} from "./music/music.component";
 import {RouterLink} from "@angular/router";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -10,7 +11,8 @@ import {RouterLink} from "@angular/router";
   declarations: [UploadedMusicComponent,MusicComponent],
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    ReactiveFormsModule
   ],
   exports:[UploadedMusicComponent,MusicComponent]
 })

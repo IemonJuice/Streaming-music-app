@@ -19,5 +19,5 @@ export class Music {
   genre: string;
 
   @ManyToOne(() => User, (user) => user.loadedMusic)
-  authorId:User
+  authorId!: User;
 }

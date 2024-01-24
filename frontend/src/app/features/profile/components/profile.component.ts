@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.store.dispatch(getUserProfileAction({profile: profile}))
       },
       error: (err) => {
-        console.log(err);
+        this.authService.logout();
       }
     })
   }

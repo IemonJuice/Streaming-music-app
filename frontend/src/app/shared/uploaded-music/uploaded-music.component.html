@@ -3,7 +3,7 @@
     <div routerLink=".." class="uploaded__navigation_back">
       <img src="./assets/images/svgs/arrow_back.svg" alt="">
     </div>
-    <div routerLink=".." class="uploaded__navigation_back">
+    <div (click)="isUploadingModalVisible = !isUploadingModalVisible" class="uploaded__navigation_back">
       <img width="16px" src="./assets/images/svgs/plus.svg" alt="">
     </div>
   </div>
@@ -13,9 +13,56 @@
   <div class="uploaded__list">
     <ng-container *ngIf="profile | async as profileInfo">
       <app-music *ngFor="let loadedMusic of profileInfo.loadedMusic" [music]="loadedMusic">
-        <img width="16px" class="rotate-45" src="./assets/images/svgs/plus.svg" alt="">
+        <img (click)="deleteFile(loadedMusic.id)" width="16px" class="rotate-45" src="./assets/images/svgs/plus.svg" alt="">
       </app-music>
     </ng-container>
   </div>
+</div>
+
+<div [@fromBottomToTop] class="uploaded__modal" *ngIf=" isUploadingModalVisible">
+  <form class="uploaded__modal_form" [formGroup]="form" enctype="multipart/form-data">
+    <input
+      class="w-4/5 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+      placeholder="Enter song name" type="text" formControlName="name">
+    <input
+      class="w-4/5 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+      placeholder="Enter author" type="text" formControlName="author">
+    <select formControlName="genre"
+            class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option [selected]="true" disabled value="Choose genre">Choose genre</option>
+      <option value="Rock">Rock</option>
+      <option value="Rap">Rap</option>
+      <option value="Metal">Metal</option>
+      <option value="Phonk">Phonk</option>
+    </select>
+
+    <div class="flex items-center justify-center w-4/5">
+      <label for="dropzone-file"
+             class="flex flex-col items-center justify-center w-full h-64 border-2 border-purple-600 border-dashed rounded-lg cursor-pointer bg-black  bg-opacity-30  dark:bg-black dark:bg-opacity-30 hover:bg-gray-100 dark:border-purple-600 dark:hover:border-purple-600 dark:hover:bg-black">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+          <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+          </svg>
+          <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or
+            drag and drop</p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">MP3, JPEG or MP4 (MAX. 20mb)</p>
+        </div>
+        <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden"/>
+      </label>
+    </div>
+
+    <div class="flex gap-2.5">
+      <button
+        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+        (click)="uploadMusic()">Upload music
+      </button>
+      <div
+        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+        (click)="isUploadingModalVisible =!isUploadingModalVisible">Close modal
+      </div>
+    </div>
+  </form>
 </div>
 

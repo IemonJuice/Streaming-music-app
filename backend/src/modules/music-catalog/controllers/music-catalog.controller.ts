@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller, FileTypeValidator,
+  Controller, Delete, FileTypeValidator,
   Get, MaxFileSizeValidator, Param, ParseFilePipe,
   Post, Res, StreamableFile,
   UploadedFile,
@@ -62,7 +62,10 @@ export class MusicCatalogController {
   async getMusicInfoById(@Param('id') musicID:number) {
     return await this.musicCatalogService.getMusicInfoById(musicID)
   }
-
+  @Delete(':id')
+  async deleteMusic(@Param('id') id:number) {
+    return this.musicCatalogService.removeMusicById(id)
+  }
 }
 
 

@@ -21,6 +21,6 @@ export class User{
   @Column({nullable:false})
   email:string;
 
-  @OneToMany(() => Music, (music) => music.author,{nullable:true})
+  @OneToMany(() => Music, (music) => music.authorId,{nullable:true})
   loadedMusic:Music[]
 }

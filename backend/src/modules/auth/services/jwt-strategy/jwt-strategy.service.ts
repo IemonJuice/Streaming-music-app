@@ -16,9 +16,11 @@ export class JwtStrategyService extends PassportStrategy(Strategy) {
       secretOrKey: 'secret',
     });
   }
+
   async validate(payload: any) {
-    return await this.userRepository.findOneBy({
-      id: payload.sub,
+    return await this.userRepository.findOne({
+      where: { id: payload.sub },
+      relations: ['loadedMusic'],
     });
   }
 }
