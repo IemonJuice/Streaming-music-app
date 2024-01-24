@@ -1,5 +1,6 @@
 import {createReducer, on} from "@ngrx/store";
-import {changeCurrentPlayingMusic} from "../actions/actions";
+import {changeCurrentPlayingMusic, getUserProfileAction} from "../actions/actions";
+import {Profile} from "../../core/models/profile.model";
 
 export interface CurrentMusic {
   id: number;
@@ -9,7 +10,7 @@ export interface CurrentMusic {
 }
 
 const initialPlayingMusic: CurrentMusic = {author: "", id: 0, imageUrl: "", name: ""}
-
+const initialProfile:Profile = {dateOfRegistration: "", email: "", firstName: "", id: 0, loadedMusic: [], username: ""}
 export const currentPlayingMusicReducer = createReducer(initialPlayingMusic,
   on(changeCurrentPlayingMusic,
     (state, {music}) => {
@@ -20,3 +21,5 @@ export const currentPlayingMusicReducer = createReducer(initialPlayingMusic,
         name:music.name
       }
     }))
+
+export const profileReducer = createReducer(initialProfile,on(getUserProfileAction,(state,{profile}) => profile))

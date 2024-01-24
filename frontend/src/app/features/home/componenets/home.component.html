@@ -63,7 +63,9 @@
   </div>
   <div class="main__music">
     <ng-container *ngIf="(musicList$ | async) as music ">
-      <app-music  *ngFor="let song of music" [music]="song"></app-music>
+      <app-music  *ngFor="let song of music" [music]="song">
+        <img width="32px" src="../../../assets/images/svgs/heart.svg" alt="">
+      </app-music>
     </ng-container>
   </div>
 </main>

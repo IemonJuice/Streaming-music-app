@@ -18,7 +18,7 @@
       <div class="profile__info_content">
         <div class="profile__info_block">
           <div><span class="text-purple-800">#</span>Uploaded</div>
-          <div>1</div>
+          <div>{{profileInformation.loadedMusic.length}}</div>
         </div>
         <div class="profile__info_block">
           <div><span class="text-purple-800">#</span>Liked</div>
@@ -36,9 +36,8 @@
         <img src="./assets/images/svgs/heart.svg" alt=""> Liked <img style="scale:-1"
                                                                      src="./assets/images/svgs/arrow_back.svg" alt="">
       </div>
-      <div>
-        <img src="./assets/other/upload.png" alt=""> Uploaded<img style="scale:-1"
-                                                                  src="./assets/images/svgs/arrow_back.svg" alt="">
+      <div routerLink="uploaded">
+        <img  src="./assets/other/upload.png" alt=""> Uploaded<img style="scale:-1" src="./assets/images/svgs/arrow_back.svg" alt="">
       </div>
       <div>
         <img src="./assets/other/username.png" alt=""> Personal information<img style="scale:-1"
@@ -50,7 +49,9 @@
                                                                           src="./assets/images/svgs/arrow_back.svg"
                                                                           alt="">
       </div>
+
     </div>
 
   </div>
 </ng-container>
+

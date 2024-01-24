@@ -1,0 +1,21 @@
+<div class="uploaded">
+  <div class="uploaded__navigation">
+    <div routerLink=".." class="uploaded__navigation_back">
+      <img src="./assets/images/svgs/arrow_back.svg" alt="">
+    </div>
+    <div routerLink=".." class="uploaded__navigation_back">
+      <img width="16px" src="./assets/images/svgs/plus.svg" alt="">
+    </div>
+  </div>
+  <div class="uploaded__heading">
+    Your uploading
+  </div>
+  <div class="uploaded__list">
+    <ng-container *ngIf="profile | async as profileInfo">
+      <app-music *ngFor="let loadedMusic of profileInfo.loadedMusic" [music]="loadedMusic">
+        <img width="16px" class="rotate-45" src="./assets/images/svgs/plus.svg" alt="">
+      </app-music>
+    </ng-container>
+  </div>
+</div>
+
