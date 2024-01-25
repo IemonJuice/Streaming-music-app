@@ -4,6 +4,7 @@ import {ProfileComponent} from './components/profile.component';
 import {routes} from "./profile.routes";
 import {RouterModule} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -11,12 +12,13 @@ import {SharedModule} from "../../shared/shared.module";
   declarations: [
     ProfileComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild(routes),
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule,
 
-  ]
+    ]
 })
 export class ProfileModule {
 }

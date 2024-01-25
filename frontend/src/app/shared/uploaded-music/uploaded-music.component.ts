@@ -4,7 +4,7 @@ import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UploadService} from "../upload.service";
+import {UploadService} from "../upload/upload.service";
 
 @Component({
   selector: 'app-uploaded-music',

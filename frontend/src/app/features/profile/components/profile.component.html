@@ -18,7 +18,7 @@
       <div class="profile__info_content">
         <div class="profile__info_block">
           <div><span class="text-purple-800">#</span>Uploaded</div>
-          <div>{{profileInformation.loadedMusic.length}}</div>
+          <div>{{ profileInformation.loadedMusic?.length }}</div>
         </div>
         <div class="profile__info_block">
           <div><span class="text-purple-800">#</span>Liked</div>
@@ -37,14 +37,15 @@
                                                                      src="./assets/images/svgs/arrow_back.svg" alt="">
       </div>
       <div routerLink="uploaded">
-        <img  src="./assets/other/upload.png" alt=""> Uploaded<img style="scale:-1" src="./assets/images/svgs/arrow_back.svg" alt="">
+        <img src="./assets/other/upload.png" alt=""> Uploaded<img style="scale:-1"
+                                                                  src="./assets/images/svgs/arrow_back.svg" alt="">
       </div>
-      <div>
+      <div (click)="isFullInformationVisible = !isFullInformationVisible">
         <img src="./assets/other/username.png" alt=""> Personal information<img style="scale:-1"
                                                                                 src="./assets/images/svgs/arrow_back.svg"
                                                                                 alt="">
       </div>
-      <div  (click)="deleteProfile()">
+      <div (click)="deleteProfile()">
         <img src="./assets/other/username.png" alt=""> Delete Account<img style="scale:-1"
                                                                           src="./assets/images/svgs/arrow_back.svg"
                                                                           alt="">
@@ -53,5 +54,38 @@
     </div>
 
   </div>
+  <form [formGroup]="profileForm" [@fromBottomToTop] class="profile__personal-info" *ngIf="isFullInformationVisible">
+    <div (click)="isFullInformationVisible=!isFullInformationVisible" class="profile__personal-info_back">
+      <img width="24px" src="./assets/images/svgs/arrow_back.svg" alt="">
+    </div>
+    <div class="profile__personal-info_info">
+
+      <div class="flex justify-center items-center flex-col w-full">
+        <label>User ID</label>
+        <input type="text" formControlName="id">
+      </div>
+
+      <div class="flex justify-center items-center flex-col w-full">
+        <label>Date of registration</label>
+        <input type="text"  formControlName="dateOfRegistration">
+      </div>
+
+      <div class="flex justify-center items-center flex-col w-full">
+        <label>First name</label>
+        <input  type="text"  formControlName="firstName">
+      </div>
+
+      <div class="flex justify-center items-center flex-col w-full">
+        <label>Email</label>
+        <input  type="text" formControlName="email">
+      </div>
+      <div class="flex justify-center items-center flex-col w-full">
+        <label>Username</label>
+        <input  type="text" formControlName="username">
+      </div>
+      <button class="profile__change" *ngIf="isNotEditableUserInfo" (click)="changeIsEditableUserInfo()">Change</button>
+      <button class="profile__change_confirm"  *ngIf="!isNotEditableUserInfo" (click)="changeIsEditableUserInfo()">Confirm</button>
+    </div>
+  </form>
 </ng-container>
 

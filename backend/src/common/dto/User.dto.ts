@@ -1,10 +1,8 @@
-import {Music} from "./music.model";
 
-export interface Profile{
+export interface UserDto{
   dateOfRegistration:string;
   email:string;
   firstName:string;
   id:number;
   username:string;
-  loadedMusic?: Music[]
 }
