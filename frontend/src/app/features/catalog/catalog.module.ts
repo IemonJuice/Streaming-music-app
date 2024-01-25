@@ -3,6 +3,7 @@ import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {RouterModule} from "@angular/router";
 import {routes} from "./catalog.routes";
 import { CatalogComponent } from './components/catalog.component';
+import {SharedModule} from "../../shared/shared.module";
 
 
 
@@ -13,7 +14,8 @@ import { CatalogComponent } from './components/catalog.component';
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        NgOptimizedImage
+        NgOptimizedImage,
+        SharedModule
     ]
 })
 export class CatalogModule { }

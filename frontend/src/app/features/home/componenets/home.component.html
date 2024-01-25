@@ -15,42 +15,19 @@
       Trending right now
     </h2>
     <div class="main__trending_blocks">
-      <div class="main__trending_block">
+      <ng-container *ngIf="(musicList$ | async) as music ">
+      <div  *ngFor="let song of music.slice(0,3)" (click)="startPlaying(song)" class="main__trending_block">
         <div class="block__inner">
           <div>
             <h3>
-              Lorem ipsum
+              {{song.name}}
             </h3>
-            <p class="flex items-center gap-0.5 "><img width="20px" src="./assets/images/svgs/music-logo.svg" alt="">Lorem
-              ipsum</p>
+            <p class="flex items-center gap-0.5 "><img width="20px" src="./assets/images/svgs/music-logo.svg" alt="">{{song.author}}</p>
           </div>
           <img width="50px" src='./assets/images/svgs/play-btn.svg' alt="">
         </div>
       </div>
-      <div class="main__trending_block">
-        <div class="block__inner">
-          <div>
-            <h3>
-              Lorem ipsum
-            </h3>
-            <p class="flex items-center gap-0.5 "><img width="20px" src="./assets/images/svgs/music-logo.svg" alt="">Lorem
-              ipsum</p>
-          </div>
-          <img width="50px" src='./assets/images/svgs/play-btn.svg' alt="">
-        </div>
-      </div>
-      <div class="main__trending_block">
-        <div class="block__inner">
-          <div>
-            <h3>
-              Lorem ipsum
-            </h3>
-            <p class="flex items-center gap-0.5 "><img width="20px" src="./assets/images/svgs/music-logo.svg" alt="">Lorem
-              ipsum</p>
-          </div>
-          <img width="50px" src='./assets/images/svgs/play-btn.svg' alt="">
-        </div>
-      </div>
+      </ng-container>
     </div>
   </div>
   <div class="main__genres_line">
