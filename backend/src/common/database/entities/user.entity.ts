@@ -1,5 +1,6 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Music} from "./music.entity";
+import {ManyToMany} from "typeorm";
 
 @Entity()
 export class User{
@@ -23,4 +24,7 @@ export class User{
 
   @OneToMany(() => Music, (music) => music.authorId,{nullable:true})
   loadedMusic:Music[]
+
+  @ManyToMany(() => Music, (music) => music.usersThatLiked)
+  likedMusic:Music[]
 }

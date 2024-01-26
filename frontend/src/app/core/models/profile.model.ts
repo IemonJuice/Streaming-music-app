@@ -6,5 +6,6 @@ export interface Profile{
   firstName:string;
   id:number;
   username:string;
+  likedMusic?:Music[]
   loadedMusic?: Music[]
 }

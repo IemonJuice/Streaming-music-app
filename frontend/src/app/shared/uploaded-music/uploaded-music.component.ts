@@ -4,7 +4,7 @@ import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UploadService} from "../upload/upload.service";
+import {MusicService} from "../upload/music.service";
 
 @Component({
   selector: 'app-uploaded-music',
@@ -22,7 +22,7 @@ import {UploadService} from "../upload/upload.service";
 export class UploadedMusicComponent implements OnInit {
   private store: Store<{ userProfile: Profile }> = inject(Store<{ userProfile: Profile }>)
   profile!: Observable<Profile>
-  private uploadService: UploadService = inject(UploadService);
+  private uploadService: MusicService = inject(MusicService);
   isUploadingModalVisible: boolean = false;
   musicToUpload!: File;
   form: FormGroup = inject(FormBuilder).group({

@@ -1,0 +1,5 @@
+<div class="liked">
+  <ng-container *ngIf="likedMusic | async as music">
+      <app-music *ngFor="let song of music" [music]="song"></app-music>
+  </ng-container>
+</div>

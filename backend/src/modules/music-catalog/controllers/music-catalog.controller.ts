@@ -66,6 +66,11 @@ export class MusicCatalogController {
   async deleteMusic(@Param('id') id:number) {
     return this.musicCatalogService.removeMusicById(id)
   }
+
+  @Get('liked/:userid')
+  async getLikedMusic(@Param('userid') userID:number) {
+    return await this.musicCatalogService.getLikedMusic(userID)
+  }
 }
 
 

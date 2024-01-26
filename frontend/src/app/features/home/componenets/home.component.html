@@ -41,7 +41,8 @@
   <div class="main__music">
     <ng-container *ngIf="(musicList$ | async) as music ">
       <app-music  *ngFor="let song of music" [music]="song">
-        <img width="32px" src="../../../assets/images/svgs/heart.svg" alt="">
+        <img (click)="isLikeClicked = !isLikeClicked" *ngIf="!checkIsLikedMusic(song) && !isLikeClicked" width="32px" src="../../../assets/images/svgs/heart.svg" alt="">
+        <img (click)="isLikeClicked = !isLikeClicked" *ngIf="checkIsLikedMusic(song)  || isLikeClicked" width="32px" src="./assets/images/svgs/liked.svg" alt="">
       </app-music>
     </ng-container>
   </div>

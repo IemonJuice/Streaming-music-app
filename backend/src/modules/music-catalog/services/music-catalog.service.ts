@@ -9,7 +9,7 @@ import {User} from "../../../common/database/entities/user.entity";
 
 @Injectable()
 export class MusicCatalogService {
-  constructor(@InjectRepository(Music) private musicRepository: Repository<Music>, @InjectRepository(User) private userRepository:Repository<User>) {
+  constructor(@InjectRepository(Music) private musicRepository: Repository<Music>, @InjectRepository(User) private userRepository: Repository<User>) {
   }
 
   async addNewMusic(musicDto: MusicDto, filename: string) {
@@ -19,12 +19,12 @@ export class MusicCatalogService {
     music.fileName = filename;
     music.genre = musicDto.genre;
     const user = await this.userRepository.findOne({
-      where:{
-        id:musicDto.id
+      where: {
+        id: musicDto.id
       }
     })
 
-    if(user){
+    if (user) {
       music.authorId = user
     }
     return await this.musicRepository.save(music)
@@ -59,7 +59,7 @@ export class MusicCatalogService {
       .getMany()
   }
 
-  async getMusicInfoBySpecificSearch(musicInfo:string) {
+  async getMusicInfoBySpecificSearch(musicInfo: string) {
     return this.musicRepository.createQueryBuilder('music')
       .select()
       .where('music.author = :searchingField', {
@@ -73,14 +73,22 @@ export class MusicCatalogService {
 
   async removeMusicById(id: number) {
     const music = await this.musicRepository.findOne({
-      where:{
-        id:id
+      where: {
+        id: id
       }
     })
     const path = await this.getMusicFileById(id)
-    fs.unlink(path,(err) => {
+    fs.unlink(path, (err) => {
       console.log(err);
     })
     return this.musicRepository.remove(music)
+  }
+
+  async getLikedMusic(userID: number) {
+    return await this.musicRepository
+      .createQueryBuilder('music')
+      .innerJoin('music.usersThatLiked', 'user')
+      .where('user.id = :userID', { userID })
+      .getMany();
   }
 }

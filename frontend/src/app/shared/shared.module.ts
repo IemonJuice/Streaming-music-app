@@ -4,16 +4,18 @@ import {UploadedMusicComponent} from "./uploaded-music/uploaded-music.component"
 import {MusicComponent} from "./music/music.component";
 import {RouterLink} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
+import {LikedComponent} from "./liked/liked.component";
 
 
 
 @NgModule({
-  declarations: [UploadedMusicComponent,MusicComponent],
+  declarations: [UploadedMusicComponent,MusicComponent,LikedComponent],
   imports: [
     CommonModule,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
-  exports:[UploadedMusicComponent,MusicComponent]
+  exports:[UploadedMusicComponent,MusicComponent,LikedComponent]
 })
 export class SharedModule { }

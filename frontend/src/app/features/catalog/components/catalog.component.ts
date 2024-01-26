@@ -22,6 +22,7 @@ export class CatalogComponent {
   musicService:HomeService = inject(HomeService)
   isCatalogListVisible:boolean = false;
   songs!:Observable<Music[]>
+  isLikedListVisible: boolean = false;
   changeCatalogVisibility(genre: string) {
     this.isCatalogListVisible = true;
     this.getSongsByGenre(genre);

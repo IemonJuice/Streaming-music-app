@@ -1,5 +1,6 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {User} from "./user.entity";
+import {ManyToMany} from "typeorm";
 
 @Entity()
 export class Music {
@@ -20,4 +21,8 @@ export class Music {
 
   @ManyToOne(() => User, (user) => user.loadedMusic)
   authorId!: User;
+
+  @ManyToMany(() => User, (user) => user.likedMusic)
+  @JoinTable()
+  usersThatLiked:User[]
 }

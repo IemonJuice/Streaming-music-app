@@ -10,8 +10,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../shared/users/user.service";
 
 
-
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -26,7 +24,7 @@ import {UserService} from "../../../shared/users/user.service";
   ]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-
+  likedNumber!: number;
   profileID!: number;
   profile!: Observable<Profile>
   authService: AuthService = inject(AuthService)
@@ -34,14 +32,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   store: Store<{ userProfile: Profile }> = inject(Store<{ userProfile: Profile }>)
   authSubscription!: Subscription;
   isFullInformationVisible: boolean = false;
-  isNotEditableUserInfo:boolean = true
-  usersService:UserService = inject(UserService);
-  profileForm:FormGroup = inject(FormBuilder).group({
-    id:[null,[Validators.required]],
-    dateOfRegistration:[null,[Validators.required]],
-    firstName:[null,[Validators.required]],
-    username:[null,[Validators.required]],
-    email:[null,[Validators.required]],
+  isNotEditableUserInfo: boolean = true
+  usersService: UserService = inject(UserService);
+  profileForm: FormGroup = inject(FormBuilder).group({
+    id: [null, [Validators.required]],
+    dateOfRegistration: [null, [Validators.required]],
+    firstName: [null, [Validators.required]],
+    username: [null, [Validators.required]],
+    email: [null, [Validators.required]],
   })
 
   ngOnInit(): void {
@@ -49,7 +47,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.profile = this.authService.getProfile()
     this.authSubscription = this.authService.getProfile().subscribe({
       next: (profile) => {
-
+        this.likedNumber = profile.likedMusic!.length
         this.profileID = profile.id;
 
         this.store.dispatch(getUserProfileAction({profile: profile}))
@@ -86,13 +84,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   changeIsEditableUserInfo() {
 
     this.isNotEditableUserInfo = !this.isNotEditableUserInfo;
-    if(this.profileForm.disabled){
+    if (this.profileForm.disabled) {
       this.profileForm.enable()
       this.profileForm.get('id')?.disable()
       this.profileForm.get('dateOfRegistration')?.disable()
-    }
-    else{
-      if(this.profileForm.valid){
+    } else {
+      if (this.profileForm.valid) {
         this.usersService.changeProfileInfo(this.profileForm.getRawValue())
       }
       this.profileForm.disable()
