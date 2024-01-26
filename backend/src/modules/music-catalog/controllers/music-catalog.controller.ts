@@ -62,8 +62,16 @@ export class MusicCatalogController {
   async getMusicInfoById(@Param('id') musicID:number) {
     return await this.musicCatalogService.getMusicInfoById(musicID)
   }
+
+  @Delete('liked')
+  async deleteFromTheLikedMusic(@Body() musicDataToDelete:{musicId:number,userId:number}) {
+    console.log(musicDataToDelete)
+    return this.musicCatalogService.removeMusicFromTheLiked(musicDataToDelete)
+  }
+
   @Delete(':id')
   async deleteMusic(@Param('id') id:number) {
+    console.log('hgaha')
     return this.musicCatalogService.removeMusicById(id)
   }
 
@@ -71,6 +79,12 @@ export class MusicCatalogController {
   async getLikedMusic(@Param('userid') userID:number) {
     return await this.musicCatalogService.getLikedMusic(userID)
   }
+
+  @Post('liked')
+  async addToTheLikedMusic(@Body() musicDataToAddToLiked:{musicId:number,userId:number}) {
+    return this.musicCatalogService.addMusicToTheLiked(musicDataToAddToLiked)
+  }
+
 }
 
 

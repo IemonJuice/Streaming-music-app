@@ -12,14 +12,14 @@ import {Music} from "../../core/models/music.model";
   styleUrl: './liked.component.scss'
 })
 export class LikedComponent implements OnInit {
-  private musicPlayerService: MusicService = inject(MusicService)
+  private musicService: MusicService = inject(MusicService)
   private store: Store<{ userProfile: Profile }> = inject(Store<{ userProfile: Profile }>)
   private router: Router = inject(Router)
   likedMusic!:Observable<Music[]>
   ngOnInit() {
     this.store.select('userProfile').subscribe({
       next: async (profile) => {
-        this.likedMusic = await this.musicPlayerService.getLikedMusic(profile.id)
+        this.likedMusic = await this.musicService.getLikedMusic(profile.id)
       },
       error: async (err) => {
        await this.router.navigateByUrl('auth')

@@ -4,18 +4,18 @@
       <img [@fadeInOut] src="https://i.pinimg.com/564x/ab/76/87/ab7687dcb9fb83575c4b72b19386ff3d.jpg" alt="">
     </div>
     <div  class="player__music_info">
-      <h2><span [@fadeInOut] class="text-purple-700">#</span>{{ music.name }}</h2>
+      <h2><span [@fadeInOut] class="text-purple-700">#</span>{{ music.name}}</h2>
       <h3><span [@fadeInOut] class="text-purple-700">#</span>{{ music.author }}</h3>
     </div>
     <div  class="player__controls">
       <audio #audioElement class="hidden" [src]="audioSrc" controls></audio>
       <div class="left-10 absolute">
-        <img width="32px" src="./assets/images/svgs/random.svg" alt="">
+        <img (click)="addToLiked(music)" *ngIf="!isLikedMusic" width="32px" src="./assets/images/svgs/heart.svg" alt="">
+        <img (click)="removeFromLiked(music)" *ngIf="isLikedMusic" width="32px" src="../../../assets/images/svgs/liked.svg" alt="">
       </div>
       <div (click)="prevSong()" class="player__prev_button">
         <img class="-scale-x-100" width="32px" src="./assets/images/svgs/next-prev-button.svg" alt="">
       </div>
-
       <div class="player__play_button">
         <img (click)="play(audioElement)" *ngIf="isAudioPaused" width="64px" src="./assets/images/svgs/play-button.svg"
              alt="">

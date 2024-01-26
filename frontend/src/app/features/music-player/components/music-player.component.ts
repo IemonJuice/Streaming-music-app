@@ -6,8 +6,8 @@ import {Observable} from "rxjs";
 import {MusicPlayerService} from "../services/music-player.service";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {changeCurrentPlayingMusic} from "../../../store/actions/actions";
-
+import {Profile} from "../../../core/models/profile.model";
+import {MusicService} from "../../../shared/upload/music.service";
 
 
 @Component({
@@ -24,26 +24,38 @@ import {changeCurrentPlayingMusic} from "../../../store/actions/actions";
   ]
 })
 export class MusicPlayerComponent implements OnInit, AfterViewInit {
+  @ViewChild('audioElement', {static: false}) audioElement?: ElementRef
   audioSrc: SafeUrl | undefined;
-  musicId!:number;
+  musicId!: number;
   musicInterval: any;
   isAudioPaused: boolean = true;
-  @ViewChild('audioElement', {static: false}) audioElement?: ElementRef
-  store: Store<{ currentPlayingMusic: CurrentMusic }> = inject(Store<{ currentPlayingMusic: CurrentMusic }>);
-  musicInfo!: Observable<Music>
+  likedMusic: Music[] = []
+  isLikedMusic: boolean = false;
   musicLength: number = 0;
   currentTime: any = 0;
-  musicPlayerService: MusicPlayerService = inject(MusicPlayerService)
-  sanitizer: DomSanitizer = inject(DomSanitizer)
   isLoop: boolean = false;
+  userID:number = 0;
+  musicInfo!: Observable<Music>
+
+  store: Store<{ currentPlayingMusic: CurrentMusic }> = inject(Store<{ currentPlayingMusic: CurrentMusic }>);
+  private userStore: Store<{ userProfile: Profile }> = inject(Store<{ userProfile: Profile }>)
+  private musicService: MusicService = inject(MusicService)
+  private musicPlayerService: MusicPlayerService = inject(MusicPlayerService)
+  private sanitizer: DomSanitizer = inject(DomSanitizer)
 
   ngOnInit() {
     this.musicInfo = this.store.select('currentPlayingMusic')
+
     this.musicInfo.subscribe(music => {
       this.getMusicFile(music.id)
       this.musicId = music.id;
     })
 
+    this.userStore.select('userProfile').subscribe(user => {
+      this.likedMusic = user.likedMusic!;
+      this.userID = user.id
+    })
+    this.checkIsLikedMusic(this.musicId);
   }
 
   getMusicFile(id: number) {
@@ -102,7 +114,7 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit {
     clearInterval(this.musicInterval)
     this.currentTime = 0;
     this.isAudioPaused = true;
-    this.musicInfo = this.musicPlayerService.getNextSong(this.musicId+1);
+    this.musicInfo = this.musicPlayerService.getNextSong(this.musicId + 1);
     this.musicId++;
     this.getMusicFile(this.musicId)
   }
@@ -111,8 +123,34 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit {
     clearInterval(this.musicInterval)
     this.currentTime = 0;
     this.isAudioPaused = true;
-    this.musicInfo = this.musicPlayerService.getNextSong(this.musicId-1);
+    this.musicInfo = this.musicPlayerService.getNextSong(this.musicId - 1);
     this.musicId--;
     this.getMusicFile(this.musicId)
+  }
+
+  addToLiked(music: Music) {
+    this.musicService.addToLikedMusic(music.id,this.userID).subscribe({
+      next: () => {
+        this.isLikedMusic = true;
+      },
+      error: (err) => {
+        this.isLikedMusic = false;
+      }
+    })
+  }
+
+  removeFromLiked(music: Music) {
+    this.musicService.removeFromTheLikedMusic(music,this.userID).subscribe({
+      next: () => {
+        this.isLikedMusic = false;
+      },
+      error: (err) => {
+        this.isLikedMusic = true;
+      }
+    })
+  }
+
+  checkIsLikedMusic(musicId: number) {
+    this.isLikedMusic = !!this.likedMusic!.find((music) => music.id === musicId)
   }
 }

@@ -34,7 +34,7 @@
   </div>
   <div *ngIf="isCatalogListVisible && !isLikedListVisible"  class="catalog__list">
     <app-music *ngFor="let song of songs | async as music" [music]="song">
-      <img width="32px" src="../../../assets/images/svgs/heart.svg" alt="">
+      <img width="32px" src="../../../assets/images/svgs/liked.svg" alt="">
     </app-music>
     <button class="catalog__list_clear" (click)="isCatalogListVisible = false">Clear filter</button>
   </div>

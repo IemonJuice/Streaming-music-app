@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {BadRequestException, HttpCode, Injectable} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {Music} from '../../../common/database/entities/music.entity';
@@ -88,7 +88,50 @@ export class MusicCatalogService {
     return await this.musicRepository
       .createQueryBuilder('music')
       .innerJoin('music.usersThatLiked', 'user')
-      .where('user.id = :userID', { userID })
+      .where('user.id = :userID', {userID})
       .getMany();
+  }
+
+  async addMusicToTheLiked(musicToLikeWithUser: { musicId: number; userId: number }) {
+    const existedMusic = await this.musicRepository.findOne({
+      where: {
+        id: musicToLikeWithUser.musicId
+      },
+      relations: ['usersThatLiked']
+    })
+    const existedUser = await this.userRepository.findOne({
+      where: {
+        id: musicToLikeWithUser.userId
+      },
+      relations: ['likedMusic']
+    })
+    if (!existedUser || !existedMusic) {
+      throw new BadRequestException();
+    }
+    existedUser.likedMusic.push(existedMusic);
+    await this.userRepository.save(existedUser)
+    return existedMusic;
+  }
+
+  async removeMusicFromTheLiked(musicDataToDelete: { musicId: number; userId: number }) {
+    const existedMusic = await this.musicRepository.findOne({
+      where: {
+        id: musicDataToDelete.musicId
+      },
+      relations: ['usersThatLiked']
+    })
+    const existedUser = await this.userRepository.findOne({
+      where: {
+        id: musicDataToDelete.userId
+      },
+      relations: ['likedMusic']
+    })
+    if (!existedUser || !existedMusic) {
+      throw new BadRequestException();
+
+    }
+    existedUser.likedMusic = existedUser.likedMusic.filter((value, index, array) => value.id !== existedMusic.id);
+    await this.userRepository.save(existedUser)
+    return existedMusic;
   }
 }
